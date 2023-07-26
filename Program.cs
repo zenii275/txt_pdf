@@ -240,7 +240,7 @@ namespace pdf_text
                     if (_str.Trim().Contains("此聯空白作廢") == true && (sample_name.ToLower() == "sample0.pdf" || sample_name.ToLower() == "firstpage_a4.pdf"))
                         dtl_morepage_flag = 1;
 
-                    if (_str.Trim().Contains("全民健康保險保險費及滯納金欠費明細表") == true || _str.Trim().Contains("全民健康保險紓困基金貸款明細表") == true)
+                    if (_str.Trim().Contains("報") == true || _str.Trim().Contains("表") == true)
                         next_line_flag = 1;
                     else if (line_cnt == 1 && _str.Trim() == "")
                         next_line_flag = 0;
@@ -250,7 +250,7 @@ namespace pdf_text
                         continue;
                     }
 
-                    if (sample_name.ToLower() == "sample0.pdf" || sample_name.ToLower() == "firstpage_a4.pdf")
+                    if (sample_name.ToLower() == "sample0.pdf" || sample_name.ToLower() == "sample1.pdf")
                     {
                         if (line_cnt == 22 && next_line_flag == 0)
                         {
@@ -492,7 +492,7 @@ namespace pdf_text
                     }
                     else
                     {
-                        phrase.SetLeading(common.get_column_dist(page_size, page_write, MAX_FontSize_Phrase, top_dist, ctrl_LN), 0); //因字體大小可由控制碼控制，行距須以該行最大字體計算 20150821 Add by Sam
+                        phrase.SetLeading(common.get_column_dist(page_size, page_write, MAX_FontSize_Phrase, top_dist, ctrl_LN), 0); 
                     }
                     doc.Add(phrase); 
                     phrase.Clear();
@@ -515,7 +515,7 @@ namespace pdf_text
                         if (prttray != "" && prttray != null) 
                             Common.SendToPrinterViaGSBATCHPRINT(printer, PDF_FILE, page_size, page_write, prttray);
                         else
-                            Common.SendToPrinterViaGSBATCHPRINT(printer, PDF_FILE, page_size, page_write); //此function若pdf檔超過100MB則不列印，避免造成印表機塞車
+                            Common.SendToPrinterViaGSBATCHPRINT(printer, PDF_FILE, page_size, page_write); 
                         Console.WriteLine(@"pdf_text轉置成功，已順利" + action.ToLower() + " " + PDF_FILE + " printer=" + printer);
                         logger.Debug("pdf_text轉置成功，已順利" + action.ToLower() + " " + PDF_FILE + " printer=" + printer);
                         break;
